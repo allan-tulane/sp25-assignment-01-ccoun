@@ -6,7 +6,10 @@ See assignment-01.pdf for details.
 
 def foo(x):
     ### TODO
-    pass
+    if x <= 1:
+        return 1
+    else:
+        return (x-1) + (x-2)
 
 def longest_run(mylist, key):
     ### TODO
