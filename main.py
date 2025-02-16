@@ -7,9 +7,9 @@ See assignment-01.pdf for details.
 def foo(x):
     ### TODO
     if x <= 1:
-        return 1
+        return x
     else:
-        return (x-1) + (x-2)
+        return foo(x-1) + foo(x-2)
 
 def longest_run(mylist, key):
     ### TODO
