@@ -13,7 +13,15 @@ def foo(x):
 
 def longest_run(mylist, key):
     ### TODO
-    pass
+    x = 0
+    maxX = 0
+    for num in mylist:
+        if num == key:
+            x += 1
+            maxX = max(maxX, x)
+        else:
+            x = 0
+    return maxX
 
 
 class Result:
@@ -41,7 +49,40 @@ def to_value(v):
         
 def longest_run_recursive(mylist, key):
     ### TODO
-    pass
+        if len(mylist) == 1:
+        if mylist[0] == key:
+            return Result(1, 1, 1, True)
+        else:
+            return Result(0, 0, 0, False)
+
+    mid = len(mylist) // 2
+    left_result = longest_run_recursive(mylist[:mid], key)
+    right_result = longest_run_recursive(mylist[mid:], key)
+
+    # Combine the results from the left and right arrays
+    longest_size = max(left_result.longest_size, right_result.longest_size)
+
+    # Check if the longest run crosses the midpoint
+    cross_size = 0
+    if mylist[mid - 1] == key and mylist[mid] == key:
+        cross_size = left_result.right_size + right_result.left_size
+
+    longest_size = max(longest_size, cross_size)
+
+    # Compute the left_size for the combined result
+    left_size = left_result.left_size
+    if left_result.is_entire_range and right_result.is_entire_range:
+        left_size += right_result.left_size
+
+    # Compute the right_size for the combined result
+    right_size = right_result.right_size
+    if right_result.is_entire_range:
+        right_size += left_result.right_size
+
+    # Check if the entire range is a continuous run of the key
+    is_entire_range = left_result.is_entire_range and right_result.is_entire_range
+
+    return Result(left_size, right_size, longest_size, is_entire_range)
 
 
 
