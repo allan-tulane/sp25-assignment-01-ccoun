@@ -2,7 +2,7 @@
 
 # CMPS 2200 Assignment 1
 
-**Name:**_________________________
+**Name:** Charlie Coun
 
 
 In this assignment, you will learn more about asymptotic notation, parallelism, functional languages, and algorithmic cost models. As in the recitation, some of your answer will go here and some will go in `main.py`. You are welcome to edit this `assignment-01.md` file directly, or print and fill in by hand. If you do the latter, please scan to a file `assignment-01.pdf` and push to your github repository. 
@@ -13,34 +13,35 @@ In this assignment, you will learn more about asymptotic notation, parallelism, 
 
   - 1a. Is $2^{n+1} \in O(2^n)$? Why or why not? 
 .  
-.  
+.  Yes, $2^{n+1} \in O(2^n)$, since big O notation ignores constant factors, and $2^{n+1}$ can be written as 2 x $2^{n}$, so $2^{n} \in O(2^n)$
 .  
 .  
 . 
   - 1b. Is $2^{2^n} \in O(2^n)$? Why or why not?     
 .  
-.  
+.  No, $2^{2^n} \in O(2^n)$ is not true since $2^{2^n}$ can be written as $2^{n^{2}}$, which we can see grows exponentially faster than $O(2^n)$
 .  
 .  
 .  
   - 1c. Is $n^{1.01} \in O(\mathrm{log}^2 n)$?    
 .  
-.  
+.  No, $n^{1.01} \in O(\mathrm{log}^2 n)$ is not true. This is becuase big O notation asks whether $n^{1.01}$ grows at most as fast as $O(\mathrm{log}^2 n)$, which is not the case since polynomial functions dominate logarithmic functions in asymptotic growth
 .  
 .  
 
   - 1d. Is $n^{1.01} \in \Omega(\mathrm{log}^2 n)$?  
 .  
-.  
+.  Yes, $n^{1.01} \in \Omega(\mathrm{log}^2 n)$. This is because $\Omega$ notation asks whether $n^{1.01}$ grows at least as fast as $O(\mathrm{log}^2 n)$, which is the case since polynomial growth is always at least as large as logarithmic growth
 .  
 .  
   - 1e. Is $\sqrt{n} \in O((\mathrm{log} n)^3)$?  
 .  
-.  
+.  No, $\sqrt{n} \in O((\mathrm{log} n)^3)$ is not true. This is becuase $\sqrt{n}$ can be rewritten as $n^{0.5}$, showing it goes through polynomial growth. We know that polynomial functions always dominate logarithmic functions in asymptotic growth
 .  
 .  
   - 1f. Is $\sqrt{n} \in \Omega((\mathrm{log} n)^3)$?  
-.  
+. 
+.  Yes, $\sqrt{n} \in \Omega((\mathrm{log} n)^3)$. This is because $\sqrt{n}$ goes through polynomial growth and will be greater than $O((\mathrm{log} n)^3)$ for some sufficiently large n, which satisfies $\Omega$ notation
 
 
 2. **SPARC to Python** (12 pts)
@@ -63,8 +64,8 @@ $$
   - 2b. (6 pts) What does this function do, in your own words?  
 
 .  
-.  
-.  
+.  This function first checks if x = 0 or 1, and then returns x if true as the base cases. 
+.  If x > 1, it then recursively calls itself with x-2 and x-1 until reaching the base cases, where it returns x. It then adds the results of the recursive calls together.
 .  
 .  
 .  
@@ -93,8 +94,8 @@ E.g., `longest_run([2,12,12,8,12,12,12,0,12,1], 12) == 3`
   - 3b. (4 pts) What is the Work and Span of this implementation?  
 
 .  
-.  
-.  
+.  The work for this implimentation would be O(n), since we iterate through the entire list of n elements one time.
+.  The span would also be O(n), since we must run through all n elements sequentially, so the longest sequence is the entire list.
 .  
 .  
 .  
@@ -108,8 +109,8 @@ E.g., `longest_run([2,12,12,8,12,12,12,0,12,1], 12) == 3`
   - 3d. (4 pts) What is the Work and Span of this sequential algorithm?  
 .  
 .  
-.  
-.  
+.  For this algorithm the work would be O(n). The recurrance relation for a recursive tree takes W(n/2) for each half of the list and O(1) to combine them, leading to 2W(n/2) + O(1), which simplifies into O(n).
+.  The span of algorithm corresponds to the longest possible path through the recursive tree, and since the input size is halved at each recursive step, the depth and span of the tree would be O(logn).
 .  
 .  
 .  
@@ -122,11 +123,10 @@ E.g., `longest_run([2,12,12,8,12,12,12,0,12,1], 12) == 3`
   - 3e. (4 pts) Assume that we parallelize in a similar way we did with `sum_list_recursive`. That is, each recursive call spawns a new thread. What is the Work and Span of this algorithm?  
 
 .  
+.  If we parallelize it in a similar way to what we did with 'sum_list_recursive,' the total work function would become W(n/2) + O(n), meaning that the work would be O(nlogn).
+.  The span would remain the same however, at S(n) = O(log n)
 .  
 .  
 .  
 .  
 .  
-.  
-.  
-
